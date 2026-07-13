@@ -4,11 +4,9 @@
 
 (package
  (name atcoder)
+ (allow_empty)
  (synopsis "AtCoder OCaml environment")
  (depends
   (ocaml
    (>= 4.14))
-  dune
-  (alcotest :with-test)
-  (qcheck :with-test)
-  (qcheck-alcotest :with-test)))
+  dune))
