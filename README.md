@@ -22,31 +22,5 @@ contests/
 
 ## セットアップ
 
-`direnv allow` で Nix devShell を自動ロードする。
-
-## ビルド
-
-```sh
-dune build                                          # プロジェクト全体
-dune build contests/abs/tasks/practice_1/main.exe   # 単一問題
-```
-
-## 実行
-
-```sh
-dune exec contests/abs/tasks/practice_1/main.exe
-```
-
-標準入力は手動で流す。例:
-
-```sh
-printf '1\n2 3\ntest\n' | dune exec contests/abs/tasks/practice_1/main.exe
-```
-
-## REPL (utop)
-
-```sh
-dune utop contests/abs/tasks/practice_1
-```
-
-当該ディレクトリ配下のモジュールをロードした状態で utop が起動する。
+`direnv allow` で Nix devShell を自動ロードする。開発コマンドは
+[CONTRIBUTING.md](CONTRIBUTING.md) を参照。
