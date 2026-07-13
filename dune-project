@@ -1,10 +1,10 @@
 (lang dune 3.0)
-(name hello)
+(name atcoder)
 (generate_opam_files true)
 
 (package
- (name hello)
- (synopsis "Template OCaml project")
+ (name atcoder)
+ (synopsis "AtCoder OCaml environment")
  (depends
   (ocaml
    (>= 4.14))
