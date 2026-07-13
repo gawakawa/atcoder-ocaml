@@ -8,5 +8,5 @@
  (synopsis "AtCoder OCaml environment")
  (depends
   (ocaml
-   (>= 4.14))
+   (>= 5.2))
   dune))
