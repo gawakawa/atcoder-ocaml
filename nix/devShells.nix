@@ -17,6 +17,7 @@ _: {
           ++ [
             pkgs.online-judge-tools
             (import ./atcoder-cli.nix { inherit pkgs; })
+            (import ./aclogin.nix { inherit pkgs; })
           ];
 
         shellHook = ''

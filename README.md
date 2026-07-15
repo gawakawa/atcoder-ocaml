@@ -29,8 +29,17 @@ contests/
 ```sh
 ln -sfn "$PWD/acc-config" "$(acc config-dir)"
 acc config oj-path "$(which oj)"
-acc login   # AtCoder のユーザー名/パスワードを対話入力
 ```
+
+AtCoder は CAPTCHA 導入により `acc login` での自動ログインが機能しないため、
+[`aclogin`](https://github.com/key-moon/aclogin) でブラウザのセッション Cookie を渡す。
+ブラウザで AtCoder にログインし、開発者ツールで `REVEL_SESSION` Cookie の値を控えてから:
+
+```sh
+aclogin
+```
+
+プロンプトに Cookie の値を貼り付けると `oj`/`acc` 両方のセッションストアに保存される。
 
 コンテストごとに:
 
