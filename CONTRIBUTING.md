@@ -10,10 +10,10 @@
 
 ## Testing against AtCoder samples
 
-Sample inputs/outputs are fetched with [`oj`](https://github.com/online-judge-tools/oj) (available inside `nix develop`) and stored under each task's `tests/` directory, then committed to git.
+Sample inputs/outputs are fetched with [`oj`](https://github.com/online-judge-tools/oj) (available inside `nix develop`) and stored under each task's `test/` directory, then committed to git.
 
 ```sh
 cd contests/abs/tasks/practice_1
-oj d -d tests https://atcoder.jp/contests/abs/tasks/practice_1
-oj t -c "dune exec ./main.exe" -d tests
+oj d https://atcoder.jp/contests/abs/tasks/practice_1
+oj t -c "dune exec ./main.exe"
 ```

@@ -1,0 +1,6 @@
+{
+  "task": {
+    "program": ["main.ml", "dune"],
+    "submit": "main.ml"
+  }
+}

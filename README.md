@@ -20,6 +20,27 @@ contests/
             └── main.ml
 ```
 
+## 新しいコンテストの追加
+
+[`acc`](https://github.com/Tatamo/atcoder-cli) (`nix develop` 内で利用可能) でコンテスト内の全問題のディレクトリ・テンプレート・サンプルを一括生成する。
+
+初回のみのセットアップ:
+
+```sh
+ln -sfn "$PWD/acc-config" "$(acc config-dir)"
+acc config oj-path "$(which oj)"
+acc login   # AtCoder のユーザー名/パスワードを対話入力
+```
+
+コンテストごとに:
+
+```sh
+cd contests
+acc new abc321
+```
+
+`contests/abc321/tasks/<task_id>/{main.ml,dune,test/sample-*.{in,out}}` が全問題分生成される。
+
 ## セットアップ
 
 `direnv allow` で Nix devShell を自動ロードする。開発コマンドは

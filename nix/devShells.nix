@@ -14,7 +14,10 @@ _: {
           config.ciPackages
           ++ config.pre-commit.settings.enabledPackages
           ++ devPackages
-          ++ [ pkgs.online-judge-tools ];
+          ++ [
+            pkgs.online-judge-tools
+            (import ./atcoder-cli.nix { inherit pkgs; })
+          ];
 
         shellHook = ''
           ${config.pre-commit.shellHook}
