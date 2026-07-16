@@ -15,7 +15,7 @@ After cloning, `_build/` doesn't exist yet, so ocamllsp reports `no config for f
 
 ## Scaffolding a new contest
 
-Use `new <contest-id>` instead of calling `acc new` directly — it runs `acc new` and then `dune build @check` so ocamllsp has config for the newly scaffolded tasks immediately. If you call `acc new` directly, run `dune build @check` afterwards yourself.
+Use `new <contest-id>` instead of calling `acc new` directly — it also runs `dune build @check` (see [Initial setup](#initial-setup)) so the newly scaffolded tasks get Merlin config immediately. If you call `acc new` directly, run `dune build @check` afterwards yourself.
 
 ## Testing against AtCoder samples
 

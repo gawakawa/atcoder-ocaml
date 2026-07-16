@@ -47,8 +47,8 @@ aclogin
 new abc321
 ```
 
-`contests/abc321/tasks/<task_id>/{main.ml,dune,test/sample-*.{in,out}}` が全問題分生成され、
-`dune build @check` により Merlin 設定も併せて生成される（ocamllsp が `nil` を返さないようにするため）。
+`contests/abc321/tasks/<task_id>/{main.ml,dune,test/sample-*.{in,out}}` が全問題分生成される
+（`new` の詳細は [CONTRIBUTING.md](CONTRIBUTING.md) を参照）。
 
 ## セットアップ
 
