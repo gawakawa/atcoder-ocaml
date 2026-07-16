@@ -5,8 +5,17 @@
 - `nix fmt` - Format code
 - `nix flake check` - Run checks (format, lint, build, tests)
 - `nix build` - Build the project
+- `new <contest-id>` - Scaffold a new contest with `acc new` and generate Merlin config, inside `nix develop`
 - `dune exec contests/abs/tasks/practice_1/main.exe` - Run a problem's executable inside `nix develop`
 - `dune utop contests/abs/tasks/practice_1` - Start a REPL (utop) with a problem's modules loaded, inside `nix develop`
+
+## Initial setup
+
+After cloning, `_build/` doesn't exist yet, so ocamllsp reports `no config for file ... (ocamllsp:nil)` when opening any `.ml` file. Run `dune build @check` once (inside `nix develop`) to generate the Merlin config.
+
+## Scaffolding a new contest
+
+Use `new <contest-id>` instead of calling `acc new` directly — it runs `acc new` and then `dune build @check` so ocamllsp has config for the newly scaffolded tasks immediately. If you call `acc new` directly, run `dune build @check` afterwards yourself.
 
 ## Testing against AtCoder samples
 

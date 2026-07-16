@@ -52,6 +52,7 @@
 
       _module.args = {
         inherit main devPackages;
+        inherit (scope') dune;
       };
     };
 }
