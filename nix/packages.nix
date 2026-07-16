@@ -23,6 +23,7 @@
       on = inputs.opam-nix.lib.${system};
       devPackagesQuery = {
         utop = "*";
+        ocaml-lsp-server = "*";
       };
       query = devPackagesQuery // {
         ocaml-base-compiler = "5.2.0";
