@@ -19,15 +19,14 @@
       ...
     }:
     let
-      package = "hello";
+      package = "atcoder";
       on = inputs.opam-nix.lib.${system};
       devPackagesQuery = {
-        ocaml-lsp-server = "*";
-        ocamlformat = "*";
         utop = "*";
+        ocaml-lsp-server = "*";
       };
       query = devPackagesQuery // {
-        ocaml-base-compiler = "*";
+        ocaml-base-compiler = "5.2.0";
       };
       scope = on.buildOpamProject' { resolveArgs.with-test = true; } ./.. query;
       overlay = _final: prev: {

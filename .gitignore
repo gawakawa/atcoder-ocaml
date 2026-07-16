@@ -3,3 +3,4 @@ result
 .mcp.json
 .pre-commit-config.yaml
 _build
+acc-config/session.json
