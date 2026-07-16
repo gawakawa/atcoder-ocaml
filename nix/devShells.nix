@@ -5,7 +5,6 @@ _: {
       pkgs,
       main,
       devPackages,
-      dune,
       ...
     }:
     let
@@ -22,12 +21,11 @@ _: {
             pkgs.online-judge-tools
             atcoder-cli
             (import ./aclogin.nix { inherit pkgs; })
-            (import ./new.nix { inherit pkgs atcoder-cli dune; })
+            (import ./new.nix { inherit pkgs atcoder-cli; })
           ];
 
         shellHook = ''
           ${config.pre-commit.shellHook}
-          export ROOT="$PWD"
         '';
       };
     };

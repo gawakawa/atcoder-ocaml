@@ -1,20 +1,12 @@
 {
   pkgs,
   atcoder-cli,
-  dune,
 }:
-let
-  script = (pkgs.writeScriptBin "new" (builtins.readFile ../scripts/new.sh)).overrideAttrs (old: {
-    buildCommand = "${old.buildCommand}\n patchShebangs $out";
-  });
-in
-pkgs.symlinkJoin {
+pkgs.writeShellApplication {
   name = "new";
-  paths = [
-    script
+  runtimeInputs = [
     atcoder-cli
-    dune
+    pkgs.git
   ];
-  buildInputs = [ pkgs.makeWrapper ];
-  postBuild = "wrapProgram $out/bin/new --prefix PATH : $out/bin";
+  text = builtins.readFile ../scripts/new.sh;
 }
