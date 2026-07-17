@@ -9,14 +9,6 @@
 - `dune exec contests/abs/tasks/practice_1/main.exe` - Run a problem's executable inside `nix develop`
 - `dune utop contests/abs/tasks/practice_1` - Start a REPL (utop) with a problem's modules loaded, inside `nix develop`
 
-## Initial setup
-
-After cloning, `_build/` doesn't exist yet, so ocamllsp reports `no config for file ... (ocamllsp:nil)` when opening any `.ml` file. Run `dune build @check` once (inside `nix develop`) to generate the Merlin config.
-
-## Scaffolding a new contest
-
-Use `new <contest-id>` instead of calling `acc new` directly — it also builds the new contest's Merlin config (see [Initial setup](#initial-setup)) immediately after scaffolding. If you call `acc new` directly, run it from inside `contests/`: `acc new` scaffolds into the current directory, and `contests/<contest>/tasks/<task>/` must mirror the AtCoder URL (see [ディレクトリ構造](README.md#ディレクトリ構造)). Afterwards, run `dune build @check` from the repository root yourself.
-
 ## Testing against AtCoder samples
 
 Sample inputs/outputs are fetched with [`oj`](https://github.com/online-judge-tools/oj) (available inside `nix develop`) and stored under each task's `test/` directory, then committed to git.
