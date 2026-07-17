@@ -44,13 +44,11 @@ aclogin
 コンテストごとに:
 
 ```sh
-cd contests
-acc new abc321
+new abc321
 ```
 
 `contests/abc321/tasks/<task_id>/{main.ml,dune,test/sample-*.{in,out}}` が全問題分生成される。
 
 ## セットアップ
 
-`direnv allow` で Nix devShell を自動ロードする。開発コマンドは
-[CONTRIBUTING.md](CONTRIBUTING.md) を参照。
+`direnv allow` で Nix devShell を自動ロードする。初回は `dune build @check` を実行しておく。

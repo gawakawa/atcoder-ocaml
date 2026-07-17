@@ -7,6 +7,9 @@ _: {
       devPackages,
       ...
     }:
+    let
+      atcoder-cli = import ./atcoder-cli.nix { inherit pkgs; };
+    in
     {
       devShells.default = pkgs.mkShell {
         inputsFrom = [ main ];
@@ -16,8 +19,9 @@ _: {
           ++ devPackages
           ++ [
             pkgs.online-judge-tools
-            (import ./atcoder-cli.nix { inherit pkgs; })
+            atcoder-cli
             (import ./aclogin.nix { inherit pkgs; })
+            (import ./new.nix { inherit pkgs atcoder-cli; })
           ];
 
         shellHook = ''
