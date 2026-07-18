@@ -26,7 +26,7 @@
         ocaml-lsp-server = "*";
       };
       query = devPackagesQuery // {
-        ocaml-base-compiler = "5.2.0";
+        ocaml-base-compiler = "5.3.0";
       };
       scope = on.buildOpamProject' { resolveArgs.with-test = true; } ./.. query;
       overlay = _final: prev: {
