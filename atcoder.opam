@@ -2,9 +2,14 @@
 opam-version: "2.0"
 synopsis: "AtCoder OCaml environment"
 depends: [
-  "ocaml" {>= "5.2"}
+  "ocaml" {>= "5.3"}
   "dune" {>= "3.0"}
-  "iter"
+  "batteries" {= "3.9.0"}
+  "containers" {= "3.16"}
+  "core" {= "v0.17.1"}
+  "iter" {= "1.9"}
+  "num" {= "1.6"}
+  "zarith" {= "1.14"}
   "odoc" {with-doc}
 ]
 build: [
