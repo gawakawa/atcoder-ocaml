@@ -49,6 +49,22 @@ new abc321
 
 `contests/abc321/tasks/<task_id>/{main.ml,dune,test/sample-*.{in,out}}` が全問題分生成される。
 
+## サンプルケースのテスト
+
+タスクディレクトリで `t` を実行すると、`test/` 配下のサンプルケースで
+`oj t -c "dune exec ./main.exe"` を実行する。
+
+```sh
+cd contests/abs/tasks/practice_1
+t
+```
+
+引数にタスクディレクトリへのパスを渡すと、`cd` せずにどこからでも実行できる。
+
+```sh
+t contests/abs/tasks/practice_1
+```
+
 ## セットアップ
 
 `direnv allow` で Nix devShell を自動ロードする。初回は `dune build @check` を実行しておく。
