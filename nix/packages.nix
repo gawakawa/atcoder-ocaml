@@ -28,7 +28,7 @@
       query = devPackagesQuery // {
         ocaml-base-compiler = "5.3.0";
       };
-      scope = on.buildOpamProject' { resolveArgs.with-test = true; } ./.. query;
+      scope = on.buildOpamProject' { } ./.. query;
       overlay = _final: prev: {
         ${package} = prev.${package}.overrideAttrs (_: {
           # Prevent the ocaml dependencies from leaking into dependent environments
