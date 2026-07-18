@@ -9,4 +9,5 @@
  (depends
   (ocaml
    (>= 5.2))
-  dune))
+  dune
+  iter))

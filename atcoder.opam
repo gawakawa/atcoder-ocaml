@@ -4,6 +4,7 @@ synopsis: "AtCoder OCaml environment"
 depends: [
   "ocaml" {>= "5.2"}
   "dune" {>= "3.0"}
+  "iter"
   "odoc" {with-doc}
 ]
 build: [
