@@ -22,7 +22,8 @@ contests/
 
 ## 新しいコンテストの追加
 
-[`acc`](https://github.com/Tatamo/atcoder-cli) (`nix develop` 内で利用可能) でコンテスト内の全問題のディレクトリ・テンプレート・サンプルを一括生成する。
+[`acc`](https://github.com/Tatamo/atcoder-cli) (`direnv allow` でロードされる devShell 内で利用可能) でコンテスト内の全問題のディレクトリ・テンプレート・サンプルを一括生成する。
+`acc` の設定は `.envrc` が自動で紐付けるため、`nix develop` から直接起動した場合は正しく動作しない。
 
 初回のみのセットアップ:
 
