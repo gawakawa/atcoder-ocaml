@@ -2,6 +2,12 @@
 
 AtCoder の問題を OCaml で解くための環境。
 
+## コマンド
+
+- `new <contest-id>` - コンテスト内の全問題のディレクトリ・テンプレート・サンプルを一括生成する
+- `t [task-dir]` - タスクディレクトリのサンプルケースでテストする
+- `dune utop <task-dir>` - タスクのモジュールを読み込んだ REPL を起動する
+
 ## ディレクトリ構造
 
 `contests/<contest>/tasks/<task>/` が AtCoder の URL
