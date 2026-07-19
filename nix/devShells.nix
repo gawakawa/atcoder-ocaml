@@ -9,6 +9,7 @@ _: {
     }:
     let
       atcoder-cli = import ./atcoder-cli.nix { inherit pkgs; };
+      acc = import ./acc.nix { inherit pkgs atcoder-cli; };
     in
     {
       devShells.default = pkgs.mkShell {
@@ -19,9 +20,9 @@ _: {
           ++ devPackages
           ++ [
             pkgs.online-judge-tools
-            atcoder-cli
+            acc
             (import ./aclogin.nix { inherit pkgs; })
-            (import ./new.nix { inherit pkgs atcoder-cli; })
+            (import ./new.nix { inherit pkgs acc; })
             (import ./t.nix { inherit pkgs; })
           ];
 

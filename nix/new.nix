@@ -1,11 +1,11 @@
 {
   pkgs,
-  atcoder-cli,
+  acc,
 }:
 pkgs.writeShellApplication {
   name = "new";
   runtimeInputs = [
-    atcoder-cli
+    acc
     pkgs.git
   ];
   text = builtins.readFile ../scripts/new.sh;

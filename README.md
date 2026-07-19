@@ -27,7 +27,6 @@ contests/
 初回のみのセットアップ:
 
 ```sh
-ln -sfn "$PWD/acc-config" "$(acc config-dir)"
 acc config oj-path "$(which oj)"
 ```
 
