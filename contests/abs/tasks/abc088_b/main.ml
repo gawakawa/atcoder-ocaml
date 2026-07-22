@@ -1,4 +1,9 @@
-open Printf
+let[@warning "-32"] ( let* ) = Iter.( let* )
+let[@warning "-32"] ( -- ) = Iter.( -- )
+let[@warning "-32"] sscanf = Scanf.sscanf
+let[@warning "-32"] printf = Printf.printf
+let[@warning "-32"] line () = In_channel.input_line In_channel.stdin |> Option.get
+let[@warning "-32"] lines () = In_channel.input_lines In_channel.stdin
 
 let partitioni p lst =
   List.mapi (fun i x -> i, x) lst
@@ -16,7 +21,7 @@ let solve lst =
 
 let () =
   let _n = read_int () in
-  let a_lst = read_line () |> String.split_on_char ' ' |> List.map int_of_string in
+  let a_lst = line () |> String.split_on_char ' ' |> List.map int_of_string in
   let ans = solve a_lst in
   printf "%d\n" ans
 ;;

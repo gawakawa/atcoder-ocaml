@@ -1,19 +1,23 @@
-open Printf
-open Scanf
-open Iter
-
-let guard cond = if cond then return () else empty
+let[@warning "-32"] ( let* ) = Iter.( let* )
+let[@warning "-32"] ( -- ) = Iter.( -- )
+let[@warning "-32"] sscanf = Scanf.sscanf
+let[@warning "-32"] printf = Printf.printf
+let[@warning "-32"] line () = In_channel.input_line In_channel.stdin |> Option.get
+let[@warning "-32"] lines () = In_channel.input_lines In_channel.stdin
 
 let solve a b c x =
-  length
+  Iter.length
     (let* i = 0 -- a in
      let* j = 0 -- b in
      let* k = 0 -- c in
-     guard ((500 * i) + (100 * j) + (50 * k) = x))
+     if (500 * i) + (100 * j) + (50 * k) = x then Iter.pure () else Iter.empty)
 ;;
 
 let () =
-  let a, b, c, x = scanf " %d %d %d %d" (fun a b c x -> a, b, c, x) in
+  let a = read_int () in
+  let b = read_int () in
+  let c = read_int () in
+  let x = read_int () in
   let ans = solve a b c x in
   printf "%d\n" ans
 ;;

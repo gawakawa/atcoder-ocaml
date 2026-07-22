@@ -1,4 +1,13 @@
-let a = Scanf.sscanf (read_line ()) " %d" Fun.id
-let sum_bc = Scanf.sscanf (read_line ()) " %d %d" (fun b c -> b + c)
-let s = Scanf.sscanf (read_line ()) " %s" Fun.id
-let () = Printf.printf "%d %s\n" (a + sum_bc) s
+let[@warning "-32"] ( let* ) = Iter.( let* )
+let[@warning "-32"] ( -- ) = Iter.( -- )
+let[@warning "-32"] sscanf = Scanf.sscanf
+let[@warning "-32"] printf = Printf.printf
+let[@warning "-32"] line () = In_channel.input_line In_channel.stdin |> Option.get
+let[@warning "-32"] lines () = In_channel.input_lines In_channel.stdin
+
+let () =
+  let a = read_int () in
+  let b, c = sscanf (line ()) " %d %d" (fun b c -> b, c) in
+  let s = line () in
+  printf "%d %s\n" (a + b + c) s
+;;
