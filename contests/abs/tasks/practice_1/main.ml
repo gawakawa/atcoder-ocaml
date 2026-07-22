@@ -6,7 +6,7 @@ let[@warning "-32"] line () = In_channel.input_line In_channel.stdin |> Option.g
 let[@warning "-32"] lines () = In_channel.input_lines In_channel.stdin
 
 let () =
-  let a = sscanf (line ()) " %d" Fun.id in
+  let a = read_int () in
   let b, c = sscanf (line ()) " %d %d" (fun b c -> b, c) in
   let s = line () in
   printf "%d %s\n" (a + b + c) s

@@ -21,7 +21,7 @@ let solve lst =
 ;;
 
 let () =
-  let _n = line () |> int_of_string in
+  let _n = read_line () in
   let txy_lst =
     lines () |> List.map (fun l -> sscanf l " %d %d %d" (fun t x y -> t, x, y))
   in

@@ -14,10 +14,10 @@ let solve a b c x =
 ;;
 
 let () =
-  let a = line () |> int_of_string in
-  let b = line () |> int_of_string in
-  let c = line () |> int_of_string in
-  let x = line () |> int_of_string in
+  let a = read_int () in
+  let b = read_int () in
+  let c = read_int () in
+  let x = read_int () in
   let ans = solve a b c x in
   printf "%d\n" ans
 ;;

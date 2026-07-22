@@ -7,8 +7,8 @@ let[@warning "-32"] lines () = In_channel.input_lines In_channel.stdin
 let solve lst = List.sort_uniq (fun a b -> compare b a) lst |> List.length
 
 let () =
-  let n = line () |> int_of_string in
-  let d_lst = List.init n (fun _ -> line () |> int_of_string) in
+  let _n = read_int () in
+  let d_lst = lines () |> List.map int_of_string in
   let ans = solve d_lst in
   printf "%d\n" ans
 ;;
