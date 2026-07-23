@@ -1,0 +1,3 @@
+(executable
+ (name main)
+ (libraries str num zarith threads.posix containers core iter batteries))
