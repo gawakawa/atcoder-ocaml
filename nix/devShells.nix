@@ -23,6 +23,7 @@ _: {
             (import ./aclogin.nix { inherit pkgs; })
             (import ./new.nix { inherit pkgs atcoder-cli; })
             (import ./t.nix { inherit pkgs; })
+            (import ./upsolve.nix { inherit pkgs; })
           ];
 
         shellHook = ''

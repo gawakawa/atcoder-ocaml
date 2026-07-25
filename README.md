@@ -5,6 +5,7 @@ AtCoder の問題を OCaml で解くための環境。
 ## コマンド
 
 - `new <contest-id>` - コンテスト内の全問題のディレクトリ・テンプレート・サンプルを一括生成する
+- `upsolve <contest-id> <task-id>` - 指定した問題の `main.ml` をテンプレートに戻し、コンテストディレクトリでシェルを起動する
 - `t [task-dir]` - タスクディレクトリのサンプルケースでテストする
 - `dune utop <task-dir>` - タスクのモジュールを読み込んだ REPL を起動する
 
@@ -69,6 +70,14 @@ t
 
 ```sh
 t contests/abs/tasks/practice_1
+```
+
+## 問題の解き直し
+
+`upsolve` を実行すると、対象タスクの `main.ml` をテンプレートに戻し、コンテストディレクトリでシェルを起動する。
+
+```sh
+upsolve abs practice_1
 ```
 
 ## セットアップ
