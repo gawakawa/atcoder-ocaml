@@ -1,4 +1,7 @@
 {
+  "permissions": {
+    "ask": ["Edit(contests/**)"]
+  },
   "hooks": {
     "PostToolUse": [
       {
