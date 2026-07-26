@@ -14,4 +14,40 @@ let[@warning "-32"] rec pow base n =
   | _ -> base * half * half
 ;;
 
+(** 二分探索
+
+    @param ok 述語 [p] を満たす初期値
+    @param ng 述語 [p] を満たさない初期値
+    @param p 述語関数
+    @return [p] を満たす値のうち [ng] に最も近いもの *)
+let[@warning "-32"] bisect ~ok ~ng ~p =
+  let ok = ref ok in
+  let ng = ref ng in
+  while abs (!ok - !ng) > 1 do
+    let mid = !ok + ((!ng - !ok) / 2) in
+    if p mid then ok := mid else ng := mid
+  done;
+  !ok
+;;
+
+(** 貪欲法
+
+    @param can_update 要素を食って状態を更新してよいか判定する関数
+    @param update 要素を食って状態を更新する関数
+    @param init 初期状態
+    @param items 検討する要素のリスト
+    @return 畳み込んだ最終状態 *)
+let[@warning "-32"] greedy
+                      ~(can_update : 'state -> 'item -> bool)
+                      ~(update : 'state -> 'item -> 'state)
+                      ~(init : 'state)
+                      ~(items : 'item list)
+  : 'state
+  =
+  List.fold_left
+    (fun state item -> if can_update state item then update state item else state)
+    init
+    items
+;;
+
 let () = ()
