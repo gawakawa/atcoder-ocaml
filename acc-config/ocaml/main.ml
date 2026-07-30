@@ -1,3 +1,5 @@
+open Core.Array
+
 let[@warning "-32"] ( let* ) = Iter.( let* )
 let[@warning "-32"] ( -- ) = Iter.( -- )
 let[@warning "-32"] sscanf = Scanf.sscanf
@@ -48,6 +50,28 @@ let[@warning "-32"] greedy
     (fun state item -> if can_update state item then update state item else state)
     init
     items
+;;
+
+(** 順列列挙
+
+    @param arr 配列
+    @return [arr] の順列のリスト *)
+let[@warning "-32"] permutations arr =
+  let arr = copy arr in
+  let n = length arr in
+  let results = ref [] in
+  let rec aux k =
+    if k = n
+    then results := copy arr :: !results
+    else
+      for i = k to n - 1 do
+        swap arr k i;
+        aux (k + 1);
+        swap arr k i
+      done
+  in
+  aux 0;
+  List.rev !results
 ;;
 
 let () = ()
