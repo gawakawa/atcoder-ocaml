@@ -1,5 +1,3 @@
-open Core.Array
-
 let[@warning "-32"] ( let* ) = Iter.( let* )
 let[@warning "-32"] ( -- ) = Iter.( -- )
 let[@warning "-32"] sscanf = Scanf.sscanf
@@ -57,21 +55,31 @@ let[@warning "-32"] greedy
     @param arr 配列
     @return [arr] の順列のリスト *)
 let[@warning "-32"] permutations arr =
-  let arr = copy arr in
-  let n = length arr in
+  let arr = Core.Array.copy arr in
+  let n = Core.Array.length arr in
   let results = ref [] in
   let rec aux k =
     if k = n
-    then results := copy arr :: !results
+    then results := Core.Array.copy arr :: !results
     else
       for i = k to n - 1 do
-        swap arr k i;
+        Core.Array.swap arr k i;
         aux (k + 1);
-        swap arr k i
+        Core.Array.swap arr k i
       done
   in
   aux 0;
   List.rev !results
+;;
+
+(** bit 全探索(畳み込み)
+
+    @param n 要素数
+    @param init 初期状態
+    @param f 状態とビットマスクを受け取り新しい状態を返す関数
+    @return 畳み込んだ最終状態 *)
+let[@warning "-32"] bit_search n ~init ~f =
+  Core.Sequence.init (1 lsl n) ~f:Fun.id |> Core.Sequence.fold ~init ~f
 ;;
 
 let () = ()
