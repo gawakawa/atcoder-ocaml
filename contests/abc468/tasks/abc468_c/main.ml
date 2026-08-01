@@ -1,3 +1,5 @@
+open Core.Array
+
 let[@warning "-32"] ( let* ) = Iter.( let* )
 let[@warning "-32"] ( -- ) = Iter.( -- )
 let[@warning "-32"] sscanf = Scanf.sscanf
@@ -14,4 +16,36 @@ let[@warning "-32"] rec pow base n =
   | _ -> base * half * half
 ;;
 
-let () = ()
+let permutations arr =
+  let n = length arr in
+  let results = ref [] in
+  let rec aux k =
+    if k = n
+    then results := copy arr :: !results
+    else
+      for i = k to n - 1 do
+        swap arr k i;
+        aux (k + 1);
+        swap arr k i
+      done
+  in
+  aux 0;
+  List.rev !results
+;;
+
+let solve p_lst q_lst =
+  let n = List.length p_lst in
+  let p_arr = of_list p_lst in
+  let q_arr = of_list q_lst in
+  let perms = init n ~f:(fun i -> i + 1) |> permutations in
+  Core.List.count perms ~f:(fun perm ->
+    Stdlib.compare perm p_arr > 0 && Stdlib.compare perm q_arr < 0)
+;;
+
+let () =
+  let _n = read_int () in
+  let p_lst = line () |> String.split_on_char ' ' |> List.map int_of_string in
+  let q_list = line () |> String.split_on_char ' ' |> List.map int_of_string in
+  let ans = solve p_lst q_list in
+  printf "%d\n" ans
+;;
