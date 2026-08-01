@@ -32,13 +32,7 @@ contests/
 [`acc`](https://github.com/Tatamo/atcoder-cli) (`direnv allow` でロードされる devShell 内で利用可能) でコンテスト内の全問題のディレクトリ・テンプレート・サンプルを一括生成する。
 `acc` の設定は `.envrc` が自動で紐付けるため、`nix develop` から直接起動した場合は正しく動作しない。
 
-初回のみのセットアップ:
-
-```sh
-acc config oj-path "$(which oj)"
-```
-
-AtCoder は CAPTCHA 導入により `acc login` での自動ログインが機能しないため、
+初回のみ、AtCoder は CAPTCHA 導入により `acc login` での自動ログインが機能しないため、
 [`aclogin`](https://github.com/key-moon/aclogin) でブラウザのセッション Cookie を渡す。
 ブラウザで AtCoder にログインし、開発者ツールで `REVEL_SESSION` Cookie の値を控えてから:
 
