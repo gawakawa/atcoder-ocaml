@@ -7,6 +7,10 @@ let[@warning "-32"] printf = Printf.printf
 let[@warning "-32"] line () = In_channel.input_line In_channel.stdin |> Option.value_exn
 let[@warning "-32"] lines () = In_channel.input_lines In_channel.stdin
 
+let[@warning "-32"] read_int_lst () =
+  line () |> String.split ~on:' ' |> List.map ~f:int_of_string
+;;
+
 let[@warning "-32"] rec pow base n =
   let open Int64.O in
   let half = if n = 0L then 0L else pow base (n / 2L) in
