@@ -1,12 +1,15 @@
+open Core
+
 let[@warning "-32"] ( let* ) = Iter.( let* )
 let[@warning "-32"] ( -- ) = Iter.( -- )
 let[@warning "-32"] sscanf = Scanf.sscanf
 let[@warning "-32"] printf = Printf.printf
-let[@warning "-32"] line () = In_channel.input_line In_channel.stdin |> Option.get
+let[@warning "-32"] line () = In_channel.input_line In_channel.stdin |> Option.value_exn
 let[@warning "-32"] lines () = In_channel.input_lines In_channel.stdin
+let read_int_lst () = line () |> String.split ~on:' ' |> List.map ~f:int_of_string
 
 let[@warning "-32"] rec pow base n =
-  let open Core.Int64.O in
+  let open Int64.O in
   let half = if n = 0L then 0L else pow base (n / 2L) in
   match n with
   | 0L -> 1L
@@ -14,14 +17,86 @@ let[@warning "-32"] rec pow base n =
   | _ -> base * half * half
 ;;
 
-let rec solve = function
-  | a :: (b :: c :: _ as rest) -> solve rest + if a < b && b > c then 1 else 0
-  | _ -> 0
+(** 二分探索
+
+    @param ok 述語 [p] を満たす初期値
+    @param ng 述語 [p] を満たさない初期値
+    @param p 述語関数
+    @return [p] を満たす値のうち [ng] に最も近いもの *)
+let[@warning "-32"] bisect ~ok ~ng ~p =
+  let ok = ref ok in
+  let ng = ref ng in
+  while abs (!ok - !ng) > 1 do
+    let mid = !ok + ((!ng - !ok) / 2) in
+    if p mid then ok := mid else ng := mid
+  done;
+  !ok
+;;
+
+(** 貪欲法
+
+    @param can_update 要素を食って状態を更新してよいか判定する関数
+    @param update 要素を食って状態を更新する関数
+    @param init 初期状態
+    @param items 検討する要素のリスト
+    @return 畳み込んだ最終状態 *)
+let[@warning "-32"] greedy
+                      ~(can_update : 'state -> 'item -> bool)
+                      ~(update : 'state -> 'item -> 'state)
+                      ~(init : 'state)
+                      ~(items : 'item list)
+  : 'state
+  =
+  List.fold_left
+    ~f:(fun state item -> if can_update state item then update state item else state)
+    ~init
+    items
+;;
+
+(** 順列列挙
+
+    @param arr 配列
+    @return [arr] の順列のリスト *)
+let[@warning "-32"] permutations arr =
+  let arr = Array.copy arr in
+  let n = Array.length arr in
+  let results = ref [] in
+  let rec aux k =
+    if k = n
+    then results := Array.copy arr :: !results
+    else
+      for i = k to n - 1 do
+        Array.swap arr k i;
+        aux (k + 1);
+        Array.swap arr k i
+      done
+  in
+  aux 0;
+  List.rev !results
+;;
+
+(** bit 全探索(畳み込み)
+
+    @param n 要素数
+    @param init 初期状態
+    @param f 状態とビットマスクを受け取り新しい状態を返す関数
+    @return 畳み込んだ最終状態 *)
+let[@warning "-32"] bit_search n ~init ~f =
+  Sequence.init (1 lsl n) ~f:Fun.id |> Sequence.fold ~init ~f
+;;
+
+let solve arr =
+  let n = Array.length arr in
+  Array.filter_mapi arr ~f:(fun i x ->
+    if 0 <= i && i <= n - 3 && x < arr.(i + 1) && arr.(i + 1) > arr.(i + 2)
+    then Some ()
+    else None)
+  |> Array.length
 ;;
 
 let () =
-  let _n = read_int () in
-  let a_lst = line () |> String.split_on_char ' ' |> List.map int_of_string in
-  let ans = solve a_lst in
+  let _n = read_int_opt () |> Option.value_exn in
+  let a_lst = read_int_lst () in
+  let ans = Array.of_list a_lst |> solve in
   printf "%d\n" ans
 ;;
