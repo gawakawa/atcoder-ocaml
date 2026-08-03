@@ -56,36 +56,67 @@ let[@warning "-32"] greedy
     items
 ;;
 
-(** 順列列挙
+(** 順列列挙(辞書順)
 
     @param arr 配列
-    @return [arr] の順列のリスト *)
-let[@warning "-32"] permutations arr =
-  let arr = Array.copy arr in
-  let n = Array.length arr in
-  let results = ref [] in
-  let rec aux k =
-    if k = n
-    then results := Array.copy arr :: !results
-    else
-      for i = k to n - 1 do
-        Array.swap arr k i;
-        aux (k + 1);
-        Array.swap arr k i
-      done
+    @return [arr] を昇順に並べ替えた列から始まる、すべての順列を辞書順に列挙する Iter *)
+let[@warning "-32"] permutations arr : int array Iter.t =
+  fun yield ->
+  let next_permutation a =
+    let n = Array.length a in
+    let i = ref (n - 2) in
+    while !i >= 0 && a.(!i) >= a.(!i + 1) do
+      decr i
+    done;
+    if !i < 0
+    then false
+    else (
+      let j = ref (n - 1) in
+      while a.(!j) <= a.(!i) do
+        decr j
+      done;
+      Array.swap a !i !j;
+      let lo = ref (!i + 1)
+      and hi = ref (n - 1) in
+      while !lo < !hi do
+        Array.swap a !lo !hi;
+        incr lo;
+        decr hi
+      done;
+      true)
   in
-  aux 0;
-  List.rev !results
+  let a = Array.copy arr in
+  Array.sort a ~compare:Int.compare;
+  let continue_ = ref true in
+  while !continue_ do
+    yield (Array.copy a);
+    continue_ := next_permutation a
+  done
 ;;
 
-(** bit 全探索(畳み込み)
+(** 組み合わせ列挙
+
+    @param k 選ぶ個数
+    @param lst リスト
+    @return [lst] から [k] 個選ぶ組み合わせの Iter *)
+let[@warning "-32"] rec combinations k lst : _ Iter.t =
+  fun yield ->
+  if k = 0
+  then yield []
+  else (
+    match lst with
+    | [] -> ()
+    | x :: xs ->
+      let with_x = combinations (k - 1) xs in
+      let without_x = combinations k xs in
+      with_x (fun c -> yield (x :: c));
+      without_x yield)
+;;
+
+(** bit 全探索
 
     @param n 要素数
-    @param init 初期状態
-    @param f 状態とビットマスクを受け取り新しい状態を返す関数
-    @return 畳み込んだ最終状態 *)
-let[@warning "-32"] bit_search n ~init ~f =
-  Sequence.init (1 lsl n) ~f:Fun.id |> Sequence.fold ~init ~f
-;;
+    @return 0 から 2^n - 1 までのビットマスクを列挙する Iter *)
+let[@warning "-32"] bit_search n : int Iter.t = 0 -- ((1 lsl n) - 1)
 
 let () = ()
