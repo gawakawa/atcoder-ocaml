@@ -113,10 +113,4 @@ let[@warning "-32"] rec combinations k lst : _ Iter.t =
       without_x yield)
 ;;
 
-(** bit 全探索
-
-    @param n 要素数
-    @return 0 から 2^n - 1 までのビットマスクを列挙する Iter *)
-let[@warning "-32"] bit_search n : int Iter.t = 0 -- ((1 lsl n) - 1)
-
 let () = ()
