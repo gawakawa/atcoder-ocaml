@@ -56,42 +56,23 @@ let[@warning "-32"] greedy
     items
 ;;
 
-(** 順列列挙(辞書順)
+(** 順列列挙
 
-    @param arr 配列
-    @return [arr] を昇順に並べ替えた列から始まる、すべての順列を辞書順に列挙する Iter *)
-let[@warning "-32"] permutations arr : int array Iter.t =
-  fun yield ->
-  let next_permutation a =
-    let n = Array.length a in
-    let i = ref (n - 2) in
-    while !i >= 0 && a.(!i) >= a.(!i + 1) do
-      decr i
-    done;
-    if !i < 0
-    then false
-    else (
-      let j = ref (n - 1) in
-      while a.(!j) <= a.(!i) do
-        decr j
-      done;
-      Array.swap a !i !j;
-      let lo = ref (!i + 1)
-      and hi = ref (n - 1) in
-      while !lo < !hi do
-        Array.swap a !lo !hi;
-        incr lo;
-        decr hi
-      done;
-      true)
+    @param lst リスト
+    @return [lst] の要素からなるすべての順列を列挙する Iter *)
+let[@warning "-32"] permutations lst : _ Iter.t =
+  let open Iter.Infix in
+  let rec insert x l =
+    match l with
+    | [] -> Iter.pure [ x ]
+    | y :: tl -> Iter.append (insert x tl >|= fun tl' -> y :: tl') (Iter.pure (x :: l))
   in
-  let a = Array.copy arr in
-  Array.sort a ~compare:Int.compare;
-  let continue_ = ref true in
-  while !continue_ do
-    yield (Array.copy a);
-    continue_ := next_permutation a
-  done
+  let rec permute l =
+    match l with
+    | [] -> Iter.pure []
+    | x :: tl -> permute tl >>= insert x
+  in
+  permute lst
 ;;
 
 (** 組み合わせ列挙
