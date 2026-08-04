@@ -58,34 +58,40 @@ let[@warning "-32"] greedy
 
 (** 順列列挙
 
-    @param arr 配列
-    @return [arr] の順列のリスト *)
-let[@warning "-32"] permutations arr =
-  let arr = Array.copy arr in
-  let n = Array.length arr in
-  let results = ref [] in
-  let rec aux k =
-    if k = n
-    then results := Array.copy arr :: !results
-    else
-      for i = k to n - 1 do
-        Array.swap arr k i;
-        aux (k + 1);
-        Array.swap arr k i
-      done
+    @param lst リスト
+    @return [lst] の要素からなるすべての順列を列挙する Iter *)
+let[@warning "-32"] permutations lst : _ Iter.t =
+  let open Iter.Infix in
+  let rec insert x xs =
+    match xs with
+    | [] -> Iter.pure [ x ]
+    | y :: ys -> Iter.append (insert x ys >|= fun ys' -> y :: ys') (Iter.pure (x :: xs))
   in
-  aux 0;
-  List.rev !results
+  let rec permute xs =
+    match xs with
+    | [] -> Iter.pure []
+    | x :: xs -> permute xs >>= insert x
+  in
+  permute lst
 ;;
 
-(** bit 全探索(畳み込み)
+(** 組み合わせ列挙
 
-    @param n 要素数
-    @param init 初期状態
-    @param f 状態とビットマスクを受け取り新しい状態を返す関数
-    @return 畳み込んだ最終状態 *)
-let[@warning "-32"] bit_search n ~init ~f =
-  Sequence.init (1 lsl n) ~f:Fun.id |> Sequence.fold ~init ~f
+    @param k 選ぶ個数
+    @param lst リスト
+    @return [lst] から [k] 個選ぶ組み合わせの Iter *)
+let[@warning "-32"] rec combinations k lst : _ Iter.t =
+  fun yield ->
+  if k = 0
+  then yield []
+  else (
+    match lst with
+    | [] -> ()
+    | x :: xs ->
+      let with_x = combinations (k - 1) xs in
+      let without_x = combinations k xs in
+      with_x (fun c -> yield (x :: c));
+      without_x yield)
 ;;
 
 let () = ()
