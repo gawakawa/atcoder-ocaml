@@ -80,18 +80,19 @@ let[@warning "-32"] permutations lst : _ Iter.t =
     @param k 選ぶ個数
     @param lst リスト
     @return [lst] から [k] 個選ぶ組み合わせの Iter *)
-let[@warning "-32"] rec combinations k lst : _ Iter.t =
-  fun yield ->
-  if k = 0
-  then yield []
-  else (
+let[@warning "-32"] combinations k lst : _ Iter.t =
+  (* invariant: List.length lst = n && 0 <= k && k <= n *)
+  let rec go k n lst yield =
     match lst with
-    | [] -> ()
+    | _ when k = 0 -> yield []
+    | _ when k = n -> yield lst
     | x :: xs ->
-      let with_x = combinations (k - 1) xs in
-      let without_x = combinations k xs in
-      with_x (fun c -> yield (x :: c));
-      without_x yield)
+      go (k - 1) (n - 1) xs (fun c -> yield (x :: c));
+      go k (n - 1) xs yield
+    | [] -> assert false
+  in
+  let n = List.length lst in
+  fun yield -> if 0 <= k && k <= n then go k n lst yield
 ;;
 
 (** 有向グラフを構築する
