@@ -96,6 +96,23 @@ let[@warning "-32"] combinations k lst : _ Iter.t =
   fun yield -> if 0 <= k && k <= n then go k n lst yield
 ;;
 
+(** 重複組み合わせ列挙
+
+    @param k 選ぶ個数
+    @param lst リスト
+    @return [lst] から重複を許して [k] 個選ぶ組み合わせの Iter *)
+let[@warning "-32"] multi_combinations k lst : _ Iter.t =
+  let rec go k lst yield =
+    match lst with
+    | _ when k = 0 -> yield []
+    | x :: xs ->
+      go (k - 1) lst (fun c -> yield (x :: c));
+      go k xs yield
+    | [] -> ()
+  in
+  fun yield -> if 0 <= k then go k lst yield
+;;
+
 (** 有向グラフを構築する
 
     @param n 頂点数
