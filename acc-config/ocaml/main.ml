@@ -113,6 +113,21 @@ let[@warning "-32"] multi_combinations k lst : _ Iter.t =
   fun yield -> if 0 <= k then go k lst yield
 ;;
 
+(** 部分集合列挙
+
+    @param lst リスト
+    @return [lst] のすべての部分集合 (2^n 通り) の Iter *)
+let[@warning "-32"] subsets lst : _ Iter.t =
+  let rec go lst yield =
+    match lst with
+    | [] -> yield []
+    | x :: xs ->
+      go xs (fun s -> yield (x :: s));
+      go xs yield
+  in
+  go lst
+;;
+
 (** 有向グラフを構築する
 
     @param n 頂点数
