@@ -61,16 +61,17 @@ let[@warning "-32"] greedy
     @param lst リスト
     @return [lst] の要素からなるすべての順列を列挙する Iter *)
 let[@warning "-32"] permutations lst : _ Iter.t =
-  let open Iter.Infix in
-  let rec insert x xs =
+  let rec insert x xs yield =
     match xs with
-    | [] -> Iter.pure [ x ]
-    | y :: ys -> Iter.append (insert x ys >|= fun ys' -> y :: ys') (Iter.pure (x :: xs))
+    | [] -> yield [ x ]
+    | y :: ys ->
+      insert x ys (fun ys' -> yield (y :: ys'));
+      yield (x :: xs)
   in
-  let rec permute xs =
+  let rec permute xs yield =
     match xs with
-    | [] -> Iter.pure []
-    | x :: xs -> permute xs >>= insert x
+    | [] -> yield []
+    | x :: xs -> permute xs (fun p -> insert x p yield)
   in
   permute lst
 ;;
