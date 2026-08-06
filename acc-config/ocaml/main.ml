@@ -61,16 +61,17 @@ let[@warning "-32"] greedy
     @param lst リスト
     @return [lst] の要素からなるすべての順列を列挙する Iter *)
 let[@warning "-32"] permutations lst : _ Iter.t =
-  let open Iter.Infix in
-  let rec insert x xs =
+  let rec insert x xs yield =
     match xs with
-    | [] -> Iter.pure [ x ]
-    | y :: ys -> Iter.append (insert x ys >|= fun ys' -> y :: ys') (Iter.pure (x :: xs))
+    | [] -> yield [ x ]
+    | y :: ys ->
+      insert x ys (fun ys' -> yield (y :: ys'));
+      yield (x :: xs)
   in
-  let rec permute xs =
+  let rec permute xs yield =
     match xs with
-    | [] -> Iter.pure []
-    | x :: xs -> permute xs >>= insert x
+    | [] -> yield []
+    | x :: xs -> permute xs (fun p -> insert x p yield)
   in
   permute lst
 ;;
@@ -80,18 +81,51 @@ let[@warning "-32"] permutations lst : _ Iter.t =
     @param k 選ぶ個数
     @param lst リスト
     @return [lst] から [k] 個選ぶ組み合わせの Iter *)
-let[@warning "-32"] rec combinations k lst : _ Iter.t =
-  fun yield ->
-  if k = 0
-  then yield []
-  else (
+let[@warning "-32"] combinations k lst : _ Iter.t =
+  (* invariant: List.length lst = n && 0 <= k && k <= n *)
+  let rec go k n lst yield =
     match lst with
-    | [] -> ()
+    | _ when k = 0 -> yield []
+    | _ when k = n -> yield lst
     | x :: xs ->
-      let with_x = combinations (k - 1) xs in
-      let without_x = combinations k xs in
-      with_x (fun c -> yield (x :: c));
-      without_x yield)
+      go (k - 1) (n - 1) xs (fun c -> yield (x :: c));
+      go k (n - 1) xs yield
+    | [] -> assert false
+  in
+  let n = List.length lst in
+  fun yield -> if 0 <= k && k <= n then go k n lst yield
+;;
+
+(** 重複組み合わせ列挙
+
+    @param k 選ぶ個数
+    @param lst リスト
+    @return [lst] から重複を許して [k] 個選ぶ組み合わせの Iter *)
+let[@warning "-32"] multi_combinations k lst : _ Iter.t =
+  let rec go k lst yield =
+    match lst with
+    | _ when k = 0 -> yield []
+    | x :: xs ->
+      go (k - 1) lst (fun c -> yield (x :: c));
+      go k xs yield
+    | [] -> ()
+  in
+  fun yield -> if 0 <= k then go k lst yield
+;;
+
+(** 部分集合列挙
+
+    @param lst リスト
+    @return [lst] のすべての部分集合 (2^n 通り) の Iter *)
+let[@warning "-32"] subsets lst : _ Iter.t =
+  let rec go lst yield =
+    match lst with
+    | [] -> yield []
+    | x :: xs ->
+      go xs (fun s -> yield (x :: s));
+      go xs yield
+  in
+  go lst
 ;;
 
 (** 有向グラフを構築する
