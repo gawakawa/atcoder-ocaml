@@ -3,7 +3,7 @@ name: "Update Flake Lock"
 on:
   workflow_dispatch: # Allow manual trigger
   schedule:
-    - cron: "0 15 * * 5" # Run every Saturday at 00:00 JST (Friday 15:00 UTC)
+    - cron: "0 13 * * 0" # Run every Sunday at 22:00 JST (Sunday 13:00 UTC)
 
 permissions:
   contents: write
