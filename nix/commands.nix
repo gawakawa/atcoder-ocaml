@@ -10,15 +10,23 @@ let
       inherit name runtimeInputs;
       text = builtins.readFile (../scripts + "/${name}.sh");
     };
-in
-builtins.attrValues (
-  builtins.mapAttrs mkCommand {
+  # bundle is defined first because new/upsolve depend on it.
+  bundle = mkCommand "bundle" [ pkgs.git ];
+  packages = {
+    inherit bundle;
+  }
+  // builtins.mapAttrs mkCommand {
     new = [
       atcoder-cli
       pkgs.git
+      bundle
     ];
     repl = [ pkgs.git ];
     t = [ pkgs.online-judge-tools ];
-    upsolve = [ pkgs.git ];
-  }
-)
+    upsolve = [
+      pkgs.git
+      bundle
+    ];
+  };
+in
+builtins.attrValues packages

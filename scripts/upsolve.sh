@@ -13,7 +13,7 @@ if [ ! -f "$TASK_DIR/main.ml" ]; then
   exit 1
 fi
 
-cp "$ROOT/acc-config/ocaml/main.ml" "$TASK_DIR/main.ml"
+bundle "$TASK_DIR/main.ml"
 
 cd "$ROOT/contests/$CONTEST_ID"
 exec "${SHELL:-bash}"

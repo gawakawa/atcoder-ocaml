@@ -8,6 +8,7 @@ AtCoder の問題を OCaml で解くための環境。
 - `upsolve <contest-id> <task-id>` - 指定した問題の `main.ml` をテンプレートに戻し、コンテストディレクトリでシェルを起動する
 - `t [task-dir]` - タスクディレクトリのサンプルケースでテストする
 - `repl [task-dir]` - dune の依存を読み込んだ REPL を起動する
+- `bundle <target-main-ml>` - `lib/mylib.ml` をテンプレートに展開して `<target-main-ml>` に書き出す（`new`/`upsolve` から自動で呼ばれる）
 
 ## ディレクトリ構造
 
