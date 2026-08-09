@@ -22,6 +22,7 @@ _: {
             atcoder-cli
             (import ./aclogin.nix { inherit pkgs; })
             (import ./new.nix { inherit pkgs atcoder-cli; })
+            (import ./repl.nix { inherit pkgs; })
             (import ./t.nix { inherit pkgs; })
             (import ./upsolve.nix { inherit pkgs; })
           ];
