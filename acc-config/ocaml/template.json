@@ -1,6 +1,7 @@
 {
   "task": {
     "program": ["main.ml", "dune"],
-    "submit": "main.ml"
+    "submit": "main.ml",
+    "cmd": "bundle main.ml"
   }
 }

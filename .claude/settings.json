@@ -1,6 +1,16 @@
 {
   "permissions": {
-    "ask": ["Edit(contests/**)"]
+    "ask": [
+      "Edit(contests/**)",
+      "Edit(README.md)",
+      "Edit(CLAUDE.md)",
+      "Edit(CONTRIBUTING.md)",
+      "Edit(docs/**)",
+      "Write(README.md)",
+      "Write(CLAUDE.md)",
+      "Write(CONTRIBUTING.md)",
+      "Write(docs/**)"
+    ]
   },
   "hooks": {
     "PostToolUse": [
