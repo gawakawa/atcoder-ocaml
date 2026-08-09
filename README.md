@@ -7,7 +7,7 @@ AtCoder の問題を OCaml で解くための環境。
 - `new <contest-id>` - コンテスト内の全問題のディレクトリ・テンプレート・サンプルを一括生成する
 - `upsolve <contest-id> <task-id>` - 指定した問題の `main.ml` をテンプレートに戻し、コンテストディレクトリでシェルを起動する
 - `t [task-dir]` - タスクディレクトリのサンプルケースでテストする
-- `dune utop <task-dir>` - タスクのモジュールを読み込んだ REPL を起動する
+- `repl [task-dir]` - dune の依存を読み込んだ REPL を起動する
 
 ## ディレクトリ構造
 
@@ -65,6 +65,25 @@ t
 ```sh
 t contests/abs/tasks/practice_1
 ```
+
+## REPL でのデバッグ
+
+タスクディレクトリで `repl` を実行すると、`dune` の `libraries` に書かれた依存
+(core, zarith, iter など) をすべて読み込んだ状態で utop が起動する。`#require`
+を手で打つ必要はない。
+
+```sh
+cd contests/abs/tasks/practice_1
+repl
+```
+
+`t` と同様、引数にタスクディレクトリへのパスを渡すとどこからでも実行できる。
+
+```sh
+repl contests/abs/tasks/practice_1
+```
+
+起動後、`#use "main.ml";;` でファイルごと読み込める。
 
 ## 問題の解き直し
 
