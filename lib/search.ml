@@ -7,11 +7,12 @@ open Core
     @param p 述語関数
     @return [p] を満たす値のうち [ng] に最も近いもの *)
 let bisect ~ok ~ng ~p =
-  let ok = ref ok in
-  let ng = ref ng in
-  while abs (!ok - !ng) > 1 do
-    let mid = !ok + ((!ng - !ok) / 2) in
-    if p mid then ok := mid else ng := mid
-  done;
-  !ok
+  let rec go ok ng =
+    if abs (ok - ng) <= 1
+    then ok
+    else (
+      let mid = ok + ((ng - ok) / 2) in
+      if p mid then go mid ng else go ok mid)
+  in
+  go ok ng
 ;;
