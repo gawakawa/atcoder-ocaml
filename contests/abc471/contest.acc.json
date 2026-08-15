@@ -1,0 +1,86 @@
+{
+  "contest": {
+    "id": "abc471",
+    "title": "AtCoder Beginner Contest 471",
+    "url": "https://atcoder.jp/contests/abc471"
+  },
+  "tasks": [
+    {
+      "id": "abc471_a",
+      "label": "A",
+      "title": "Nine or Nein",
+      "url": "https://atcoder.jp/contests/abc471/tasks/abc471_a",
+      "directory": {
+        "path": "tasks/abc471_a",
+        "testdir": "test",
+        "submit": "main.ml"
+      }
+    },
+    {
+      "id": "abc471_b",
+      "label": "B",
+      "title": "Survey Tabulation",
+      "url": "https://atcoder.jp/contests/abc471/tasks/abc471_b",
+      "directory": {
+        "path": "tasks/abc471_b",
+        "testdir": "test",
+        "submit": "main.ml"
+      }
+    },
+    {
+      "id": "abc471_c",
+      "label": "C",
+      "title": "Cookies and Greedy Takahashi",
+      "url": "https://atcoder.jp/contests/abc471/tasks/abc471_c",
+      "directory": {
+        "path": "tasks/abc471_c",
+        "testdir": "test",
+        "submit": "main.ml"
+      }
+    },
+    {
+      "id": "abc471_d",
+      "label": "D",
+      "title": "Chargers",
+      "url": "https://atcoder.jp/contests/abc471/tasks/abc471_d",
+      "directory": {
+        "path": "tasks/abc471_d",
+        "testdir": "test",
+        "submit": "main.ml"
+      }
+    },
+    {
+      "id": "abc471_e",
+      "label": "E",
+      "title": "Sum of Square of Sum",
+      "url": "https://atcoder.jp/contests/abc471/tasks/abc471_e",
+      "directory": {
+        "path": "tasks/abc471_e",
+        "testdir": "test",
+        "submit": "main.ml"
+      }
+    },
+    {
+      "id": "abc471_f",
+      "label": "F",
+      "title": "Concat (maximize)",
+      "url": "https://atcoder.jp/contests/abc471/tasks/abc471_f",
+      "directory": {
+        "path": "tasks/abc471_f",
+        "testdir": "test",
+        "submit": "main.ml"
+      }
+    },
+    {
+      "id": "abc471_g",
+      "label": "G",
+      "title": "Caeser Syllables",
+      "url": "https://atcoder.jp/contests/abc471/tasks/abc471_g",
+      "directory": {
+        "path": "tasks/abc471_g",
+        "testdir": "test",
+        "submit": "main.ml"
+      }
+    }
+  ]
+}
