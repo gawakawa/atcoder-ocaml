@@ -16,6 +16,10 @@
    (= 3.16))
   (core
    (= v0.17.1))
+  (core_bench
+   (= v0.17.0))
+  (core_unix
+   (= v0.17.1))
   (iter
    (= 1.9))
   (num

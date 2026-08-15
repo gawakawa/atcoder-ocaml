@@ -1,0 +1,3 @@
+(executable
+ (name bench)
+ (libraries mylib core core_bench core_unix.command_unix iter))
