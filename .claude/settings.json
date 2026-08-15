@@ -5,11 +5,7 @@
       "Edit(README.md)",
       "Edit(CLAUDE.md)",
       "Edit(CONTRIBUTING.md)",
-      "Edit(docs/**)",
-      "Write(README.md)",
-      "Write(CLAUDE.md)",
-      "Write(CONTRIBUTING.md)",
-      "Write(docs/**)"
+      "Edit(docs/**)"
     ]
   },
   "hooks": {
