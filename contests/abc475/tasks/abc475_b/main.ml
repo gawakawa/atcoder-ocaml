@@ -1,3 +1,5 @@
+open Core
+
 module Enumerate = struct
   [@@@warning "-32"]
 
