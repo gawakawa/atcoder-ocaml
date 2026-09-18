@@ -189,9 +189,7 @@ let[@warning "-32"] read_int_lst () =
   line () |> String.split ~on:' ' |> List.map ~f:int_of_string
 ;;
 
-let solve s =
-  String.drop_suffix (String.concat_map s ~f:(fun c -> Char.to_string c ^ "o")) 1
-;;
+let solve s = String.concat ~sep:"o" (List.map (String.to_list s) ~f:String.of_char)
 
 let () =
   let s = line () in

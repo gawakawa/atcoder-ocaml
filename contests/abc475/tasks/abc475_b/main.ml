@@ -189,25 +189,22 @@ let[@warning "-32"] read_int_lst () =
   line () |> String.split ~on:' ' |> List.map ~f:int_of_string
 ;;
 
-let split_coins price =
-  let hundreds = price mod 1000 / 100 in
-  let tens = price mod 100 / 10 in
-  let ones = price mod 10 in
+let to_coins change =
+  assert (change < 1000);
+  let ones = change mod 10 in
+  let tens = change / 10 mod 10 in
+  let hundreds = change / 100 in
   ones, tens, hundreds
 ;;
 
-let calc_change price =
-  let thousands = (price / 1000) + if price mod 1000 > 0 then 1 else 0 in
-  (1000 * thousands) - price
+let change price =
+  let paid = Int.round_up price ~to_multiple_of:1000 in
+  paid - price
 ;;
 
 let solve prices =
-  List.fold_left
-    prices
-    ~init:(0, 0, 0)
-    ~f:(fun (ones_acc, tens_acc, hundreds_acc) price ->
-      let ones, tens, hundreds = split_coins (calc_change price) in
-      ones_acc + ones, tens_acc + tens, hundreds_acc + hundreds)
+  List.fold_left prices ~init:(0, 0, 0) ~f:(fun acc price ->
+    Tuple3.map2 acc (price |> change |> to_coins) ~f:( + ))
 ;;
 
 let () =
